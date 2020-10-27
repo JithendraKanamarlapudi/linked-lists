@@ -1,0 +1,74 @@
+#include<iostream>
+using namespace std;
+
+#define N 5
+
+int queue[N];
+int front = -1;
+int rear = -1;
+
+void enqueue(int x)
+{ 
+  if(front==-1 && rear==-1)
+  { front=rear=0;
+    queue[rear]=x;
+  }
+  else if(((rear+1)%N)==front)
+    cout<<"overflow"<<endl;
+  else
+  { rear=(rear+1)%N;
+    queue[rear]=x;
+  }
+}
+
+void dequeue()
+{ if(front==-1 && rear==-1)
+   cout<<"underflow"<<endl;
+  else if(front==rear)
+   front=rear=-1;
+  else
+   front=(front+1)%N;  
+   
+}
+
+void display()
+{ int i=front;
+  if(front==-1 && rear==-1)
+   cout<<"empty ->";
+  else
+  { while(i!=(rear))
+    { cout<<queue[i]<<" ";
+	  i=((i+1)%N); 
+    }  
+    cout<<queue[i];
+  } 
+  cout<<endl<<"dequeue"<<endl;
+}
+
+main()
+{ enqueue(1);
+  enqueue(2);
+  enqueue(3);
+  enqueue(4);
+  enqueue(5);
+  
+   display();
+  
+  dequeue(); 
+   
+   display();
+  
+  cout<<"enqueue"<<endl;
+  enqueue(6);
+  
+   display();
+   
+  cout<<"enqueue"<<endl; 
+  enqueue(7);
+  
+   display();
+  
+}
+
+
+
